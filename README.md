@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Solana Transaction Decoder
 
-## Getting Started
+Paste a Solana transaction signature to explore its full instruction tree (including inner/CPI calls), balance deltas, program labels, and logs — all decoded server-side through a proxied RPC call.
 
-First, run the development server:
+## What it does
+
+- Decodes any Solana transaction by signature (mainnet-beta, devnet, testnet)
+- Shows a nested instruction tree with human-readable program labels
+- Displays token and SOL balance deltas
+- Highlights ALT-resolved accounts
+- Renders collapsible log messages
+
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Copy `.env.example` to `.env.local` and fill in your RPC URL:
 
-## Learn More
+```
+SOLANA_RPC_URL=https://your-rpc-provider.com/your-api-key
+```
 
-To learn more about Next.js, take a look at the following resources:
+If `SOLANA_RPC_URL` is not set, the app falls back to the public cluster default for the selected network. The RPC endpoint is only used server-side — it never reaches the client.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Next.js 16 (App Router, Turbopack)
+- TypeScript + Tailwind CSS v4
+- shadcn/ui (Radix primitives, new-york style)
+- `@solana/web3.js` for RPC access
